@@ -1,3 +1,4 @@
+
 h1 {
     font-size: 25px;
 }
@@ -21,7 +22,7 @@ input {
     /*margin: 0 auto;*/
 
 }
-button.btn-success {
+button.btn-success, .add_new a {
     margin-bottom: 4px;
 }
 /*button.btn-success {*/

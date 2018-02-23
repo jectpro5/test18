@@ -5,10 +5,10 @@ body {
     padding-top: 80px;
     font: 16px 'Tahoma', sans-serif;
 }
-.todo_wrapper {
+.todo_wrapper, form {
     margin: 20px auto;
     width: 500px;
-    min-height: 600px;
+    min-height: 400px;
     border: 3px solid rgba(200, 70, 100, 0.5);
     padding: 20px;
     text-align: center;
