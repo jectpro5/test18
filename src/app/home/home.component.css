@@ -1,0 +1,29 @@
+h1 {
+    font-size: 25px;
+}
+table {
+    margin: 25px auto;
+}
+td {
+    background-color: lightyellow;
+    padding: 5px;
+}
+th {
+    background-color: burlywood;
+}
+input {
+    height: 30px;
+    padding-left: 5px;
+}
+.add_new {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*margin: 0 auto;*/
+
+}
+button.btn-success {
+    margin-bottom: 4px;
+}
+/*button.btn-success {*/
+/*margin-bottom: 3px;*/
+/*}*/

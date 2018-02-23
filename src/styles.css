@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    padding-top: 80px;
+    font: 16px 'Tahoma', sans-serif;
+}
+.todo_wrapper {
+    margin: 20px auto;
+    width: 500px;
+    min-height: 600px;
+    border: 3px solid rgba(200, 70, 100, 0.5);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 3px 3px 25px rgba(200, 70, 100, 0.4);
+}
