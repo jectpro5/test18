@@ -1,3 +1,56 @@
-<p>
-  details works!
-</p>
+<div class="todos">
+
+    <div>
+        <form (submit)="addTodo($event)">
+            <input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
+            <button class="btn btn-primary" type="submit" [disabled]="newTodo===''">add todo</button>
+        </form>
+    </div>
+
+    <div [hidden]="newTodo">
+        Type in a new todo...
+    </div>
+
+    <div [hidden]="!newTodo">
+        <!-- Another two-way binding example -->
+        Typing: {{ newTodo }}
+    </div>
+    <div class="mtop20">
+        <button (click)="deleteSelectedTodos()" class="btn btn-danger">delete selected</button>
+    </div>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let todo of todos; let i=index">
+            <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed"/>
+            <span>{{ todo.newTodo }}</span>
+            <!--<span [ngClass]="{'checked': todo.completed}">{{ todo.newTodo }}</span>-->
+            <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+            <form (submit)="addToList($event)">
+                <input type="text" class="d-none" name="newTod" value="{{ todo.newTodo }}">
+                <button class="btn-btn-success">в список выполнения</button>
+            </form>
+        </li>
+    </ul>
+    <!--==========================================================================-->
+    <ul class="list-group">
+        <li *ngFor="let todo of todos">
+            <div class="list-group-item" *ngIf="todo.completed">
+            <!--<div class="list-group-item">-->
+            <!--<div class="list-group-item" *ngIf="todo.completed">-->
+                <input type="checkbox" class="checkbox"/>
+                <span>{{ todo.newTodo }}</span>
+            </div>
+        </li>
+    </ul>
+    <div>
+        <form>
+            <!--<form (submit)="addTodo($event)">-->
+            <div *ngFor="let todo of todoschecked; let i=index">
+                <input type="text" class="textfield" name="newTod" value="{{ todo.newTodo2 }}">
+                <!--<input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">-->
+                <!--<button class="btn btn-primary" type="submit" [disabled]="newTodo===''">add todo</button>-->
+            </div>
+        </form>
+    </div>
+</div>

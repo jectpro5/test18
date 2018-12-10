@@ -1,28 +1,77 @@
-<article class="todo_wrapper">
-    <h1>{{title}}</h1>
-
-    <div class="add_new">
-        <input type="text" #newTodo>
-        <button class="btn btn-success btn-sm"
-                (click)="addTodo(newTodo.value); newTodo.value=''">Add
-        </button>
-        <a routerLink="/plan-form" class="btn btn-primary btn-sm">New Task</a>
+<h1 class="text-center text-success text-uppercase  font-weight-bold">{{title}}</h1>
+<div class="container-fluid">
+    <div class="row d-md-flex">
+        <div class="col-12 col-md">
+            <section class="todo_wrapper">
+                <h1 class="text-center text-success">all tasks</h1>
+                <div class="add_new">
+                    <form #f="ngForm" (ngSubmit)="save(f.value)">
+                        <div class="form-group">
+                            <label class="add_first_time" for="task1">Add the task</label>
+                            <input #task="ngModel" [(ngModel)]="tasks1.task" name="task" id="task1" type="text"
+                                   class="form-control" required
+                                   (focus)="showBtns(wrap)"
+                                   (blur)="hideBtns(wrap)">
+                        </div>
+                        <div #wrap class="first_btns">
+                            <button class="btn btn-primary">Save</button>
+                            <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                    <section class="list-group">
+                        <div *ngFor="let t of tasks" class="bg_lght_yell list-group-item">
+                            <div class="row">
+                                <p class="col-12 col-sm-9 col-md-12 col-xl-9">{{ t.task }}</p>
+                                <div class="col-12 col-sm-3 col-md-12 col-xl-3 d-flex align-items-baseline"><a
+                                        [routerLink]="['/', t.$key]" class="btn btn-primary">Edit</a>
+                                    <button class="btn bg-success" (click)="AddToTable(t)">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <!--==================================================================================================-->
+        <div *ngIf="!forAdd" class="col-12 order-md-1 col-md">
+            <section class="todo_wrapper">
+                <h1 class="text-center text-success">filling a tasks for day</h1>
+                <div class="add_new">
+                    <section class="list-group">
+                        <div>
+                            <form #f="ngForm" (ngSubmit)="saveDay(f.value)">
+                                <mat-form-field>
+                                    <input ngModel name="date" matInput [matDatepicker]="picker"
+                                           placeholder="Choose a date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                                <div *ngFor="let t of fill" class="bg-success list-group-item">
+                                    <span>{{ t.task.task }}</span>
+                                </div>
+                                <button type="button" class="btn bg-warning" (click)="deleteFill()">Clear</button>
+                                <button class="btn btn-secondary">Save</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div *ngIf="forAdd" class="col">
+            <section class="todo_wrapper">
+                <h1 class="text-center text-success">tasks for today</h1>
+                <div *ngFor="let t of day" [className]="t[1]?.date === curDate ?
+                 'd-block bg_lght_green list-group-item' : 'd-none'">
+                    <h4 class="text-center">{{t[1]?.date}}</h4>
+                    <div *ngFor="let z of t[0]" class="row" id="today">
+                        <p [ngClass]="{'active': z.active}" class="col-9">{{ z.task.task }}</p>
+                        <!--<p (click)="activateClass(z); doneTask(t, z.task.task)">{{ z.task.task }}</p>-->
+                        <div class="col-3">
+                            <button (click)="activateClass(z)" mat-button>done</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-
-    <table>
-        <tr>
-            <th>Label</th>
-            <!--<th>Priority</th>-->
-            <!--<th>Done</th>-->
-            <th>Actions</th>
-        </tr>
-        <tr *ngFor="let todo of todos">
-            <td>{{todo.label}}</td>
-            <!--<td>{{todo.priority}}</td>-->
-            <!--<td>{{todo.done ? '&#10003;' : '&#10005;' }}</td>-->
-            <td>
-                <button class="btn btn-outline-danger btn-sm" (click)="deleteTodo(todo)">delete</button>
-            </td>
-        </tr>
-    </table>
-</article>
+</div>

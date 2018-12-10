@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "todo-e41f8"
+    "default": "todo-e41f8",
+    "tm": "todo-min"
   }
 }
